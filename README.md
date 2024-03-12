@@ -1,7 +1,7 @@
 # Check Cisco XR RPKI Server State
 A monitoring plugin designed to validate the state of RPKI servers, total Route Origin Validation (ROV), and the delta between them.
 
-To ensure consistency, it's recommended to run multiple and a diverse set of RPKI validators you have to ensure that they announce approximately the same number of ROVs, for example cases where a Trust Anchor Locator (TAL) might be missing. There might be always a slightly difference for example some validators reject >/24 ROAs.
+To ensure consistency, it's recommended to run multiple and a diverse set of RPKI validators. You have to ensure that they announce approximately the same number of ROVs otherwise it might be indicate a problem for example where a Trust Anchor Locator (TAL) might be missing. There might be always a slightly difference for example some validators reject >/24 ROAs.
 
 This Plugin utilizes simple XR CLI scraping for its operations. While SNMP/Telemetry might be better options, XR CLI scraping is sufficiently accurate for checks 3-4 times a days.
 
