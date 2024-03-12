@@ -9,14 +9,17 @@ Tested on XR 6.x to 7.x on Cisco ASR and NCS
 
 
 ## Example Outputs:
-
 ```
 RPKI SERVER WARNING - 192.0.2.1 Server Down, 192.0.2.4 IPv4 ROAs out of range, 192.0.2.6 Server shutdown, 2/4 are online | '192.0.2.4_v4_roas'=15835;300000:500000;;; '192.0.2.4_v6_roas'=27103;60000:120000;;; '192.0.2.5_v4_roas'=157211;300000:500000;;; '192.0.2.5_v6_roas'=26517;60000:120000;;;
 192.0.2.4 is Online 15835/27103 ROAs
 192.0.2.5 is Online 157211/26517 ROAs
 ```
 
+or visual 
+![image](https://github.com/Bierchermuesli/check_cisco_xr_rpki_server/assets/13567009/ddbac41d-93b0-4f54-a81e-6aeb76207f20)
+
+
 ## Setup / Requirements
 
 - pip install -r requirements.txt
-- the SSH user needs permissions to run "show bgp rpki server summary"
+- the SSH user needs permissions to run `show bgp rpki server summary` recommend to limit 
