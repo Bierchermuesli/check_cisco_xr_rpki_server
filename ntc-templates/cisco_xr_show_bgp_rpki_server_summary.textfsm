@@ -1,0 +1,34 @@
+Value SERVER (\S+)
+Value PORT (\S+)
+Value STATE (\S+)
+Value TIME (\S+)
+Value ROAv4 (\d+)
+Value ROAv6 (\d+)
+# Value Filldown RouterID (\S+)
+# Value Filldown LocalAS (\d+)
+# Value RemoteAS (\d+)
+# Value Required RemoteIP (\d+(\.\d+){3})
+# Value Uptime (\d+\S+)
+# Value Received_V4 (\d+)
+# Value Status (\D.*)
+
+Start
+  ^\S+\s+\S+\s+\d+\s+\d+:\d+:\d+\.\d+\s+\S+\s*$$
+  # ^Hostname.+
+  # #^${RemoteIP}\s+\d+\s+${RemoteAS}(\s+\S+){5}\s+${Uptime}\s+${Received_V4} -> Record
+  # #^${RemoteIP}\s+\d+\s+${RemoteAS}(\s+\S+){5}\s+${Uptime}\s+${Status} -> Record
+  # ^${SERVER}\s+${PORT}\s+${STATE}\s+${TIME}\s+${ROA}$$ -> Record
+  # Checking for header
+  ^Hostname\/Address\s+Transport\s+State\s+Time\s+ROAs\s+\(IPv4\/IPv6\)$$ -> BGPTable
+  ^\s*$$
+  ^. -> Error
+
+BGPTable
+  # Regex to match the complete line including network
+  # *> 10.0.0.0/8          192.168.1.1          900    100      0 65135 65235 i
+  ^${SERVER}\s*${PORT}\s+${STATE}\s*${TIME}\s*N/A\s*$$ -> Record
+  ^${SERVER}\s*${PORT}\s+${STATE}\s*${TIME}\s*${ROAv4}\/${ROAv6}\s*$$ -> Record
+  ^. -> Error
+
+# Last record is already recorded then skip doing so here.
+EOF

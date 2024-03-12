@@ -1,0 +1,3 @@
+textfsm~=1.1.3
+nagplug~=1.1
+netmiko~=4.3.0
